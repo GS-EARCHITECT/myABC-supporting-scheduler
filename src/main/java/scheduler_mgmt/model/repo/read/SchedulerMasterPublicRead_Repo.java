@@ -1,22 +1,18 @@
-package scheduler_mgmt.model.repo;
+package scheduler_mgmt.model.repo.read;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-
-import org.springframework.data.jpa.repository.Modifying;
+import java.util.concurrent.CopyOnWriteArrayList;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import scheduler_mgmt.model.master.SchedulerMaster;
 
-
-@Repository("schedulerMasterRepo")
-public interface SchedulerMasterRepo extends CrudRepository<SchedulerMaster, Long> 
+@Repository("schedulerMasterPublicReadRepo")
+public interface SchedulerMasterPublicRead_Repo extends JpaRepository<SchedulerMaster, Long> 
 { 
 @Query(value = "SELECT * FROM SCHEDULER_MASTER b where upper(trim(SCHEDULED_FLAG))<>'Y' order by rule_line_seq_no", nativeQuery = true)
-ArrayList<SchedulerMaster> getSchedules();
+CopyOnWriteArrayList<SchedulerMaster> getSchedules();
 
 @Query(value = "SELECT coalesce(count(*),0) FROM SCHEDULER_MASTER b where "
 		+ "((upper(trim(SCHEDULED_FLAG))<>'Y' and b.company_seq_no= :compSeqNo and b.rule_seq_no= :ruleSeqNo "
@@ -25,21 +21,14 @@ ArrayList<SchedulerMaster> getSchedules();
 		"  or (:toDtTm BETWEEN b.FROM_DTTM and b.TO_DTTM)))  order by rule_line_seq_no", nativeQuery = true)
 Long checkIfSExists(@Param("compSeqNo") Long compSeqNo, @Param("targetSeqNo") Long targetSeqNo, @Param("ruleSeqNo") Long ruleSeqNo, @Param("frDtTm") Timestamp frDtTm, @Param("toDtTm") Timestamp toDtTm);
 
-
 @Query(value = "SELECT * FROM SCHEDULER_MASTER where dow > 0 order by target_type", nativeQuery = true)
-ArrayList<SchedulerMaster> getSchedulesDOW();
+CopyOnWriteArrayList<SchedulerMaster> getSchedulesDOW();
 
 @Query(value = "SELECT * FROM SCHEDULER_MASTER where DAY_PLUS_BASIS > 0 order by target_type", nativeQuery = true)
-ArrayList<SchedulerMaster> getSchedulesDaysPlus();
+CopyOnWriteArrayList<SchedulerMaster> getSchedulesDaysPlus();
 
 @Query(value = "SELECT * FROM SCHEDULER_MASTER a WHERE a.rule_seq_no in :ids order by rule_seq_no", nativeQuery = true)
-SchedulerMaster getSelectSchedules(@Param("id") ArrayList<Long> ids);
+SchedulerMaster getSelectSchedules(@Param("id") CopyOnWriteArrayList<Long> ids);
 
-@Query(value = "DELETE FROM SCHEDULER_MASTER WHERE a.rule_seq_no in :ids", nativeQuery = true)
-void delSelectSchedules(@Param("ids") ArrayList<Long> ids);
-
-@Modifying
-@Query(value="update SCHEDULER_MASTER set scheduled_flag = :st WHERE rule_line_seq_no = :rlSeqNo", nativeQuery = true)
-void updateScheduleStatus(@Param("st") Character st, @Param("rlSeqNo") Long rlSeqNo);
 } 
 

@@ -2,20 +2,21 @@ package scheduler_mgmt.model.dto;
 
 import java.io.Serializable;
 
-public class SchedulerSpecEvMasterDTO implements Serializable {
+public class SchedulerSpecEvMaster_DTO implements Serializable 
+{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -590349344105748297L;
-	private long specEventSeqNo;
+	private Long specEventSeqNo;
 	private String companySeqNo;
 	private String fromDttm;
 
-	public long getSpecEventSeqNo() {
+	public Long getSpecEventSeqNo() {
 		return specEventSeqNo;
 	}
 
-	public void setSpecEventSeqNo(long specEventSeqNo) {
+	public void setSpecEventSeqNo(Long specEventSeqNo) {
 		this.specEventSeqNo = specEventSeqNo;
 	}
 
@@ -35,14 +36,14 @@ public class SchedulerSpecEvMasterDTO implements Serializable {
 		this.fromDttm = fromDttm;
 	}
 
-	public SchedulerSpecEvMasterDTO(long specEventSeqNo, String companySeqNo, String fromDttm) {
+	public SchedulerSpecEvMaster_DTO(Long specEventSeqNo, String companySeqNo, String fromDttm) {
 		super();
 		this.specEventSeqNo = specEventSeqNo;
 		this.companySeqNo = companySeqNo;
 		this.fromDttm = fromDttm;
 	}
 
-	public SchedulerSpecEvMasterDTO() {
+	public SchedulerSpecEvMaster_DTO() {
 		super();
 	}
 }

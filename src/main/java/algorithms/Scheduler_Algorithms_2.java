@@ -1,16 +1,14 @@
-package scheduler_mgmt.services;
+package algorithms;
 
 import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
+import java.util.concurrent.CopyOnWriteArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import common.DateUtil;
-import scheduler_mgmt.model.dto.SchedulerDetailDTO;
+import scheduler_mgmt.model.dto.SchedulerDetail_DTO;
 import scheduler_mgmt.model.master.SchedulerMaster;
 
 public class Scheduler_Algorithms_2 
@@ -20,9 +18,9 @@ public class Scheduler_Algorithms_2
 	@Autowired
 	
 	
-	public ArrayList<SchedulerDetailDTO> schedule_events(SchedulerMaster sm) {
-		ArrayList<SchedulerDetailDTO> scheduleDetailDtos = new ArrayList<SchedulerDetailDTO>();
-		SchedulerDetailDTO scheduleDetailDto = new SchedulerDetailDTO();
+	public CopyOnWriteArrayList<SchedulerDetail_DTO> schedule_events(SchedulerMaster sm) {
+		CopyOnWriteArrayList<SchedulerDetail_DTO> scheduleDetailDtos = new CopyOnWriteArrayList<SchedulerDetail_DTO>();
+		SchedulerDetail_DTO scheduleDetailDto = new SchedulerDetail_DTO();
 		java.util.GregorianCalendar cal = (java.util.GregorianCalendar) Calendar.getInstance();
 		DateTimeFormatter dtOnly = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		String frTime = null;
@@ -68,7 +66,7 @@ public class Scheduler_Algorithms_2
 				frTime = dt + " " + sm.getFrtm();
 				toTime = dt + " " + sm.getTotm();
 				currDate = DateUtil.addDays(currDate, 7, 0, 0, 0);
-				scheduleDetailDto = new SchedulerDetailDTO();
+				scheduleDetailDto = new SchedulerDetail_DTO();
 				scheduleDetailDto.setFrDttm(frTime);
 				scheduleDetailDto.setToDttm(toTime);
 				scheduleDetailDto.setRuleLineSeqNo(sm.getRuleLineSeqNo());

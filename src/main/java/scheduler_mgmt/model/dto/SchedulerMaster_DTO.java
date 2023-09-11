@@ -3,13 +3,13 @@ package scheduler_mgmt.model.dto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class SchedulerMasterDTO implements Serializable 
+public class SchedulerMaster_DTO implements Serializable 
 {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7315857685192294458L;
-	private long ruleLineSeqNo;
+	private Long ruleLineSeqNo;
 	private Long companySeqNo;
 	private BigDecimal jobTypeSeqNo;
 	private Long ruleSeqNo;
@@ -21,11 +21,11 @@ public class SchedulerMasterDTO implements Serializable
 	private String fromDttm;
 	private String toDttm;
 
-	public long getRuleLineSeqNo() {
+	public Long getRuleLineSeqNo() {
 		return ruleLineSeqNo;
 	}
 
-	public void setRuleLineSeqNo(long ruleLineSeqNo) {
+	public void setRuleLineSeqNo(Long ruleLineSeqNo) {
 		this.ruleLineSeqNo = ruleLineSeqNo;
 	}
 
@@ -109,7 +109,7 @@ public class SchedulerMasterDTO implements Serializable
 		this.toDttm = toDttm;
 	}
 
-	public SchedulerMasterDTO(long ruleLineSeqNo, Long companySeqNo, BigDecimal jobTypeSeqNo, Long ruleSeqNo,
+	public SchedulerMaster_DTO(Long ruleLineSeqNo, Long companySeqNo, BigDecimal jobTypeSeqNo, Long ruleSeqNo,
 			Character scheduledFlag, Long targetSeqNo, String scheduleData, String frtm, String totm, String fromDttm,
 			String toDttm) {
 		super();
@@ -126,7 +126,7 @@ public class SchedulerMasterDTO implements Serializable
 		this.toDttm = toDttm;
 	}
 
-	public SchedulerMasterDTO() {
+	public SchedulerMaster_DTO() {
 		super();
 	}
 
