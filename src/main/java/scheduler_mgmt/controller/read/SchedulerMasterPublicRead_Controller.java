@@ -20,8 +20,7 @@ import org.slf4j.LoggerFactory;
 @RestController
 @RequestMapping("/schedulerPublicReadManagement")
 public class SchedulerMasterPublicRead_Controller {
-	// private static final Logger logger =
-	// LoggerFactory.getLogger(Scheduler_Master_Controller.class);
+//	 private static final Logger logger = LoggerFactory.getLogger(SchedulerMasterPublicRead_Controller.class);
 
 	@Autowired
 	private I_SchedulerMasterPublicRead_Service schedulerMasterPublicReadService;
@@ -44,12 +43,12 @@ public class SchedulerMasterPublicRead_Controller {
 		return new ResponseEntity<>(scheduleDetailDTOs, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/getSelectSchedulesForRuleLine", produces = { MediaType.APPLICATION_JSON_VALUE })
+	@GetMapping(value = "/getSelectSchedulesForRuleLine/{rLineSeqNo}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<CopyOnWriteArrayList<SchedulerDetail_DTO>> getSelectSchedulesForRuleLine(
-			@RequestBody Long rLineSeqNo) {
+			@PathVariable Long rLineSeqNo) {
 		CompletableFuture<CopyOnWriteArrayList<SchedulerDetail_DTO>> completableFuture = schedulerMasterPublicReadService
 				.getSelectSchedulesForRuleLine(rLineSeqNo);
-		CopyOnWriteArrayList<SchedulerDetail_DTO> scheduleDetailDTOs = completableFuture.join();
+		CopyOnWriteArrayList<SchedulerDetail_DTO> scheduleDetailDTOs = completableFuture.join();		
 		return new ResponseEntity<>(scheduleDetailDTOs, HttpStatus.OK);
 	}
 

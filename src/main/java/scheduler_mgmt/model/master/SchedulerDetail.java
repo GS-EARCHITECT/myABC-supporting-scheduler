@@ -8,20 +8,20 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="SCHEDULER_DETAILS")
+@Table(name = "SCHEDULER_DETAILS")
 public class SchedulerDetail implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private SchedulerDetailPK id;
 
-	@Column(name="JOB_SEQ_NO")
+	@Column(name = "JOB_SEQ_NO")
 	private Long jobSeqNo;
 
-	@Column(name="REMARK")
+	@Column(name = "REMARK")
 	private String remarks;
 
-	@Column(name="STATUS")
+	@Column(name = "STATUS")
 	private String status;
 
 	public SchedulerDetail() {
@@ -66,7 +66,5 @@ public class SchedulerDetail implements Serializable {
 		this.remarks = remarks;
 		this.status = status;
 	}
-	
-	
 
 }

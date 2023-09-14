@@ -52,9 +52,10 @@ public class SchedulerMasterPublicRead_Service implements I_SchedulerMasterPubli
 	private SchedulerDetailPublicCUD_Repo schedulerDetailPublicCUDRepo;
 
 	@Scheduled(fixedRate = 10000)
-	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
-	public CompletableFuture<Void> createSchedules() {
-		CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+	//@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+	public void createSchedules() 
+	{
+	//	CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
 			CopyOnWriteArrayList<SchedulerMaster> schedulerMasters = schedulerMasterPublicReadRepo.getSchedules();
 
 			if (schedulerMasters != null) {
@@ -128,9 +129,9 @@ public class SchedulerMasterPublicRead_Service implements I_SchedulerMasterPubli
 					}
 				}
 			}
-			return;
-		}, asyncExecutor);
-		return future;
+	//		return;
+		//}, asyncExecutor);
+		return;
 	}
 
 

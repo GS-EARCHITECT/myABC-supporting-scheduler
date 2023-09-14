@@ -9,23 +9,23 @@ public class SchedulerMaster_DTO implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = -7315857685192294458L;
-	private Long ruleLineSeqNo;
+	private long ruleLineSeqNo;
 	private Long companySeqNo;
 	private BigDecimal jobTypeSeqNo;
 	private Long ruleSeqNo;
 	private Character scheduledFlag;
-	private Long targetSeqNo;
+	private String targetSeqNo;
 	private String scheduleData;
 	private String frtm;
 	private String totm;
 	private String fromDttm;
 	private String toDttm;
 
-	public Long getRuleLineSeqNo() {
+	public long getRuleLineSeqNo() {
 		return ruleLineSeqNo;
 	}
 
-	public void setRuleLineSeqNo(Long ruleLineSeqNo) {
+	public void setRuleLineSeqNo(long ruleLineSeqNo) {
 		this.ruleLineSeqNo = ruleLineSeqNo;
 	}
 
@@ -61,11 +61,11 @@ public class SchedulerMaster_DTO implements Serializable
 		this.scheduledFlag = scheduledFlag;
 	}
 
-	public Long getTargetSeqNo() {
+	public String getTargetSeqNo() {
 		return targetSeqNo;
 	}
 
-	public void setTargetSeqNo(Long targetSeqNo) {
+	public void setTargetSeqNo(String targetSeqNo) {
 		this.targetSeqNo = targetSeqNo;
 	}
 
@@ -109,8 +109,8 @@ public class SchedulerMaster_DTO implements Serializable
 		this.toDttm = toDttm;
 	}
 
-	public SchedulerMaster_DTO(Long ruleLineSeqNo, Long companySeqNo, BigDecimal jobTypeSeqNo, Long ruleSeqNo,
-			Character scheduledFlag, Long targetSeqNo, String scheduleData, String frtm, String totm, String fromDttm,
+	public SchedulerMaster_DTO(long ruleLineSeqNo, Long companySeqNo, BigDecimal jobTypeSeqNo, Long ruleSeqNo,
+			Character scheduledFlag, String targetSeqNo, String scheduleData, String frtm, String totm, String fromDttm,
 			String toDttm) {
 		super();
 		this.ruleLineSeqNo = ruleLineSeqNo;

@@ -33,28 +33,29 @@ public class SchedulerMasterPublicCUD_Service implements I_SchedulerMasterPublic
 	@Autowired
 	private SchedulerMasterPublicCUD_Repo schedulerMasterPublicCUDRepo;
 
+	    
 	public CompletableFuture<SchedulerMaster_DTO> newSchedulerMaster(SchedulerMaster_DTO lMaster) {
 		CompletableFuture<SchedulerMaster_DTO> future = CompletableFuture.supplyAsync(() -> {
-			logger.info("creating schedule for");
-			logger.info("Comp :" + Long.toString(lMaster.getCompanySeqNo()));
-			logger.info("Rule :" + Long.toString(lMaster.getRuleSeqNo()));
-			logger.info("Targ :" + Long.toString(lMaster.getTargetSeqNo()));
-			logger.info("From :" + lMaster.getFromDttm());
-			logger.info("To :" + lMaster.getToDttm());
 			SchedulerMaster_DTO lMaster2 = null;
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-			LocalDateTime frdttm = LocalDateTime.parse(lMaster.getFromDttm(), formatter);
-			LocalDateTime todttm = LocalDateTime.parse(lMaster.getToDttm(), formatter);
-			Timestamp fdttm = Timestamp.valueOf(frdttm);
-			Timestamp tdttm = Timestamp.valueOf(todttm);
+			
+			if(lMaster.getFromDttm() != null && lMaster.getToDttm() != null && lMaster.getCompanySeqNo() !=null && lMaster.getTargetSeqNo() !=null && lMaster.getRuleSeqNo() !=null)
+			{
+			Float countChk = schedulerMasterPublicReadRepo.checkIfSExists(lMaster.getCompanySeqNo(),lMaster.getTargetSeqNo(), lMaster.getRuleSeqNo());
 
-			Long countChk = schedulerMasterPublicReadRepo.checkIfSExists(lMaster.getCompanySeqNo(),
-					lMaster.getTargetSeqNo(), lMaster.getRuleSeqNo(), fdttm, tdttm);
-
-			if (countChk == 0) {
-				SchedulerMaster SchedulerMaster = schedulerMasterPublicReadRepo.save(this.setSchedulerMaster(lMaster));
-				lMaster2 = getSchedulerMaster_DTO(SchedulerMaster);
-				logger.info("created schedule");
+			if (countChk == 0)
+			{
+				lMaster2 = this.getSchedulerMaster_DTO(schedulerMasterPublicReadRepo.save(this.setSchedulerMaster(lMaster)));				
+			}
+			else
+			{
+				lMaster2 = new SchedulerMaster_DTO();
+				lMaster2.setRuleLineSeqNo((long) -1);				
+			}
+			}
+			else
+			{
+				lMaster2 = new SchedulerMaster_DTO();
+				lMaster2.setRuleLineSeqNo((long) -1);				
 			}
 			return lMaster2;
 		}, asyncExecutor);

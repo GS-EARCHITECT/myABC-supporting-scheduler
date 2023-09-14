@@ -14,13 +14,13 @@ public class SchedulerMaster implements Serializable
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4731012908992860044L;
+	private static final Long serialVersionUID = 4731012908992860044L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RULE_LINE_SEQ_NO")
 	@SequenceGenerator(name = "RULE_LINE_SEQ_NO", sequenceName = "RULE_LINE_SEQ_NO", allocationSize = 1)
 	@Column(name = "RULE_LINE_SEQ_NO")
-	private long ruleLineSeqNo;
+	private Long ruleLineSeqNo;
 
 	@Column(name = "COMPANY_SEQ_NO")
 	private Long companySeqNo;
@@ -47,16 +47,16 @@ public class SchedulerMaster implements Serializable
 	private Character scheduledFlag;
 
 	@Column(name = "TARGET_SEQ_NO")
-	private Long targetSeqNo;
+	private String targetSeqNo;
 
 	@Column(name = "SCHEDULE_DATA")
 	private String scheduleData;
 
-	public long getRuleLineSeqNo() {
+	public Long getRuleLineSeqNo() {
 		return ruleLineSeqNo;
 	}
 
-	public void setRuleLineSeqNo(long ruleLineSeqNo) {
+	public void setRuleLineSeqNo(Long ruleLineSeqNo) {
 		this.ruleLineSeqNo = ruleLineSeqNo;
 	}
 
@@ -116,11 +116,11 @@ public class SchedulerMaster implements Serializable
 		this.scheduledFlag = scheduledFlag;
 	}
 
-	public Long getTargetSeqNo() {
+	public String getTargetSeqNo() {
 		return targetSeqNo;
 	}
 
-	public void setTargetSeqNo(Long targetSeqNo) {
+	public void setTargetSeqNo(String targetSeqNo) {
 		this.targetSeqNo = targetSeqNo;
 	}
 
@@ -225,5 +225,24 @@ public class SchedulerMaster implements Serializable
 	public SchedulerMaster() {
 		super();
 	}
+
+	public SchedulerMaster(Long ruleLineSeqNo, Long companySeqNo, String frtm, String totm, Timestamp fromDttm,
+			Timestamp toDttm, BigDecimal jobTypeSeqNo, Long ruleSeqNo, Character scheduledFlag, String targetSeqNo,
+			String scheduleData) {
+		super();
+		this.ruleLineSeqNo = ruleLineSeqNo;
+		this.companySeqNo = companySeqNo;
+		this.frtm = frtm;
+		this.totm = totm;
+		this.fromDttm = fromDttm;
+		this.toDttm = toDttm;
+		this.jobTypeSeqNo = jobTypeSeqNo;
+		this.ruleSeqNo = ruleSeqNo;
+		this.scheduledFlag = scheduledFlag;
+		this.targetSeqNo = targetSeqNo;
+		this.scheduleData = scheduleData;
+	}
+	
+	
 
 }

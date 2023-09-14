@@ -7,7 +7,7 @@ import scheduler_mgmt.model.dto.SchedulerMaster_DTO;
 
 public interface I_SchedulerMasterPublicRead_Service 
 {
-public CompletableFuture<Void> createSchedules();	
+public void createSchedules();	
 public CompletableFuture<CopyOnWriteArrayList<SchedulerDetail_DTO>> getSelectSchedulesForCompanyTargetRule(Long cSeqNo, Long rSeqNo, Long tSeqNo);
 public CompletableFuture<CopyOnWriteArrayList<SchedulerDetail_DTO>> getSelectSchedulesForRuleLine(Long rSeqNo);
 public CompletableFuture<CopyOnWriteArrayList<SchedulerMaster_DTO>> getAllSchedulerMasters();    

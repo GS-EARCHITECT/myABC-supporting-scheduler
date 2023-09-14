@@ -2,8 +2,7 @@ package scheduler_mgmt.model.dto;
 
 import java.io.Serializable;
 
-public class SchedulerSpecEvMaster_DTO implements Serializable 
-{
+public class SchedulerSpecEvMaster_DTO implements Serializable {
 	/**
 	 * 
 	 */

@@ -1,9 +1,7 @@
 package scheduler_mgmt.model.repo.read;
 
 import java.util.concurrent.CopyOnWriteArrayList;
-
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -22,10 +20,8 @@ CopyOnWriteArrayList<SchedulerDetail> getSelectSchedulesForCompanyTargetRule(@Pa
 @Query(value = "SELECT * FROM SCHEDULER_DETAILS a WHERE a.rule_line_seq_no = :rSeqNo order by rule_line_seq_no", nativeQuery = true)
 CopyOnWriteArrayList<SchedulerDetail> getSelectSchedulesForRuleLine(@Param("rSeqNo") Long rSeqNo);
 
+@Query(value = "SELECT coalesce(count(*),0) FROM SCHEDULER_DETAILS a WHERE a.rule_line_seq_no = :id", nativeQuery = true)
 Float getCountOfSchedules(@Param("id") Long id);
 
-@Modifying
-@Query(value = "DELETE FROM SCHEDULER_DETAILS a WHERE a.rule_line_seq_no = :id", nativeQuery = true)
-void delSchedulesForRuleLine(@Param("id") Long id);
 } 
 

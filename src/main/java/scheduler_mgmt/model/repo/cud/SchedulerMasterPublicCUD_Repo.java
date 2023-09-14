@@ -7,12 +7,17 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import scheduler_mgmt.model.master.SchedulerMaster;
 
+@Transactional(propagation=Propagation.REQUIRES_NEW)
 @Repository("schedulerMasterPublicCUDRepo")
 public interface SchedulerMasterPublicCUD_Repo extends JpaRepository<SchedulerMaster, Long> 
 { 
 
+@Modifying
 @Query(value = "DELETE FROM SCHEDULER_MASTER WHERE a.rule_seq_no in :ids", nativeQuery = true)
 void delSelectSchedules(@Param("ids") CopyOnWriteArrayList<Long> ids);
 
